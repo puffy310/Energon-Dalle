@@ -3,6 +3,11 @@ import torch
 from torch import nn, LongTensor, FloatTensor, BoolTensor
 from .dalle_bart_encoder import GLU, AttentionBase
 import colossalai.nn as col_nn
+from colossalai.context import ParallelMode
+from colossalai.core import global_context as gpc
+from energonai.logging import get_dist_logger
+from energonai.kernel import transpose_pad, transpose_depad, depad
+from energonai.utils import get_current_device, is_using_pp
 
 IMAGE_TOKEN_COUNT = 256
 
