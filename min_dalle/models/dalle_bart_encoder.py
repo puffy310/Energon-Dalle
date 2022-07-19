@@ -2,6 +2,11 @@ from typing import List
 import torch
 from torch import nn, BoolTensor, FloatTensor, LongTensor
 import colossalai.nn as col_nn
+from colossalai.context import ParallelMode
+from colossalai.core import global_context as gpc
+from energonai.logging import get_dist_logger
+from energonai.kernel import transpose_pad, transpose_depad, depad
+from energonai.utils import get_current_device, is_using_pp
 
 class GLU(nn.Module):
     def __init__(self, count_in_out: int, count_middle: int):
